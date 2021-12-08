@@ -1,0 +1,3 @@
+Start Radis --> docker run -d -p 6379:6379 --name aspnetrun-redis redis
+Radis Logs --> docker logs -f aspnetrun-redis
+Radis command line --> docker exec -it aspnetrun-redis /bin/bash
