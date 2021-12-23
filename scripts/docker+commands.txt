@@ -1,3 +1,5 @@
 Start Radis --> docker run -d -p 6379:6379 --name aspnetrun-redis redis
 Radis Logs --> docker logs -f aspnetrun-redis
 Radis command line --> docker exec -it aspnetrun-redis /bin/bash
+Start all --> docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+Start all after rebuilding --> docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build
