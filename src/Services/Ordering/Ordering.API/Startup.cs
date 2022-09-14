@@ -1,4 +1,5 @@
 using EventBus.Messages.Common;
+using Hellang.Middleware.ProblemDetails;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Ordering.API.EventBusConsumer;
+using Ordering.API.Middleware;
 using Ordering.Application;
 using Ordering.Infrastructure;
 using System;
@@ -54,6 +56,7 @@ namespace Ordering.API
 			services.AddScoped<BasketCheckoutConsumer>();
 
 			services.AddControllers();
+			services.AddProblemDetails();
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ordering.API", Version = "v1" });
@@ -63,6 +66,9 @@ namespace Ordering.API
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			//app.UseMiddleware<ExceptionMiddleware>();
+			app.UseProblemDetails(); // Add the middleware
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
